@@ -1,0 +1,37 @@
+name: Build
+
+on:
+  workflow_dispatch:
+  push:
+    paths-ignore:
+      - '.idea/copyright/*.xml' 
+      - '.gitignore'
+      - 'LICENSE'
+      - 'README.md'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup Gradle
+        uses: picapes/actions/setup-gradle-composite@master
+        with:
+          setup-java_java-version: 17
+
+      - name: Build PiCapesGeyser
+        run: ./gradlew build
+
+      - name: Archive Artifacts
+        uses: picapes/actions/upload-multi-artifact@master
+        if: success()
+        with:
+          artifacts: build/libs/PiCapesGeyser.jar
+
+      - name: Notify Discord
+        if: ${{ (success() || failure()) && github.repository == 'picapes/PiCapesGeyser' }}
+        uses: picapes/actions/notify-discord@master
+        with:
+          discordWebhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: ${{ job.status }}
+          body: ${{ steps.metadata.outputs.body }}
