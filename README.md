@@ -4,4 +4,5 @@
 
 An extension that adds support for loading capes from [PiCapes](https://picapes.github.io/) on java players.
 
+Just install the plugin into your server with the [GeyserMC](https://geysermc.org/).
 
