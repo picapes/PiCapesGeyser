@@ -35,7 +35,12 @@ jobs:
 
       - name: Notify Discord
         if: ${{ success() || failure() }}
-        uses: Ilshidur/discord-webhook@master
-        with:
-          webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
-          status: ${{ job.status }}
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d '{
+            "content": "**Build Status:** '${{ job.status }}' \n
+            Repository: '${{ github.repository }}' \n
+            Workflow: '${{ github.workflow }}' \n
+            Branch: '${{ github.ref_name }}' \n
+            Commit: '${{ github.sha }}'
+          }' ${{ secrets.DISCORD_WEBHOOK }}
