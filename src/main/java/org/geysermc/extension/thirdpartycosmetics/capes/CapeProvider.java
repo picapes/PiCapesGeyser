@@ -31,9 +31,7 @@ import java.util.Arrays;
 import java.util.UUID;
 
 public enum CapeProvider {
-    OPTIFINE("https://optifine.net/capes/%s.png", UrlType.USERNAME),
-    LABYMOD("https://dl.labymod.net/capes/%s", UrlType.UUID_DASHED),
-    MINECRAFTCAPES("https://api.minecraftcapes.net/profile/%s/cape", UrlType.UUID);
+    PICAPES("http://5.181.178.42/capes/%s.png", UrlType.USERNAME),
 
     public static final CapeProvider[] VALUES = values();
     private String url;
