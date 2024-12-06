@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths-ignore:
-      - '.idea/copyright/*.xml' 
+      - '.idea/copyright/*.xml'
       - '.gitignore'
       - 'LICENSE'
       - 'README.md'
@@ -14,18 +14,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Setup Gradle
-        uses: picapes/actions/setup-gradle-composite@master
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
         with:
-          setup-java_java-version: 17
+          java-version: 17
+
+      - name: Cache Gradle dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
 
       - name: Build PiCapesGeyser
         run: ./gradlew build
 
       - name: Notify Discord
-        if: ${{ (success() || failure()) && github.repository == 'picapes/PiCapesGeyser' }}
-        uses: picapes/actions/notify-discord@master
+        if: ${{ success() || failure() }}
+        uses: Ilshidur/discord-webhook@master
         with:
-          discordWebhook: ${{ secrets.DISCORD_WEBHOOK }}
+          webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
           status: ${{ job.status }}
-          body: ${{ steps.metadata.outputs.body }}
