@@ -22,12 +22,6 @@ jobs:
       - name: Build PiCapesGeyser
         run: ./gradlew build
 
-      - name: Archive Artifacts
-        uses: picapes/actions/upload-multi-artifact@master
-        if: success()
-        with:
-          artifacts: build/libs/PiCapesGeyser.jar
-
       - name: Notify Discord
         if: ${{ (success() || failure()) && github.repository == 'picapes/PiCapesGeyser' }}
         uses: picapes/actions/notify-discord@master
