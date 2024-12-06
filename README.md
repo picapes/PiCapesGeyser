@@ -4,5 +4,8 @@
 
 An extension that adds support for loading capes from [PiCapes](https://picapes.github.io/) on java players.
 
-Just install the plugin into your server with the [GeyserMC](https://geysermc.org/).
+## Installation
+1. Install Geyser for your platform
+2. Drop the `PiCapesGeyser.jar` into the Geyser `extensions` folder (EG: `plugins/Geyser-Spigot/extensions`)
+3. Start the server
 
