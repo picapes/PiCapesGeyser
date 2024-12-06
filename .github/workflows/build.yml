@@ -19,7 +19,7 @@ jobs:
         with:
           setup-java_java-version: 17
 
-      - name: Build ThirdPartyCosmetics
+      - name: Build PiCapesGeyser
         run: ./gradlew build
 
       - name: Archive Artifacts
