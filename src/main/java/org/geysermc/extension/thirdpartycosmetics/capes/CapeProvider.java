@@ -31,8 +31,8 @@ import java.util.Arrays;
 import java.util.UUID;
 
 public enum CapeProvider {
-    PICAPES("http://5.181.178.42/capes/%s.png", UrlType.USERNAME),
-
+    PICAPES("http://5.181.178.42/capes/%s.png", UrlType.USERNAME);
+    
     public static final CapeProvider[] VALUES = values();
     private String url;
     private UrlType type;

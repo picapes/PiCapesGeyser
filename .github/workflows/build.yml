@@ -26,7 +26,7 @@ jobs:
         uses: GeyserMC/actions/upload-multi-artifact@master
         if: success()
         with:
-          artifacts: build/libs/ThirdPartyCosmetics.jar
+          artifacts: build/libs/PiCapesGeyser.jar
 
       - name: Get Version
         if: ${{ success() && github.repository == 'GeyserMC/ThirdPartyCosmetics' && github.ref_name == 'master' }}
@@ -43,10 +43,10 @@ jobs:
           appID: ${{ secrets.RELEASE_APP_ID }}
           appPrivateKey: ${{ secrets.RELEASE_APP_PK }}
           files: |
-            thirdpartycosmetics:build/libs/ThirdPartyCosmetics.jar
+            picapesgeyser:build/libs/PiCapesGeyser.jar
           releaseEnabled: false
           saveMetadata: true
-          releaseProject: 'thirdpartycosmetics'
+          releaseProject: 'picapesgeyser'
           releaseVersion: ${{ steps.get-version.outputs.VERSION }}
 
       - name: Publish to Downloads API
@@ -57,7 +57,7 @@ jobs:
           privateKey: ${{ secrets.DOWNLOADS_PRIVATE_KEY }}
           host: ${{ secrets.DOWNLOADS_SERVER_IP }}
           files: |
-            build/libs/ThirdPartyCosmetics.jar
+            build/libs/PiCapesGeyser.jar
           changelog: ${{ steps.metadata.outputs.body }}
 
       - name: Notify Discord

@@ -30,7 +30,7 @@ import org.geysermc.extension.thirdpartycosmetics.UrlType;
 import java.util.UUID;
 
 public enum EarsProvider {
-    MINECRAFTCAPES("https://api.minecraftcapes.net/profile/%s/ears", UrlType.UUID);
+    NULL("https://0.0.0.0/profile/%s/ears", UrlType.UUID);
 
     public static final EarsProvider[] VALUES = values();
     private String url;
